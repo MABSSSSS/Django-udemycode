@@ -70,6 +70,90 @@ def LoggingExample(request):
     
     return HttpResponse("Logging Demo")
     
+
+def iftagdemo(request):
+    data = {'name':'James ','isVisible':True, 'loggedIn': False , 'countrycode':'Pakistan', 'workExpereince':35, 'sateCode':'Hurrah'}
+    templatefilename = "djangobasicapp/IfTagDemo.html"
+    dict = {"Data": data}
+    return render(request,templatefilename,dict) 
     
+def ShowProducts(request):
+    Products = []
+    Processors = [
+        {'Category':'AMD', 'processors':['Ryzen 3990', 'Ryzen 3970', 'Ryzen 3960', 'Ryzen 3950 ']},
+        {'Category':'Intel', 'processors':['Xeon 8362' , 'Xeon 8358', 'Xeon 8380']}
+    ];
+    # Adding products using append method
+    Products.append({
+        'ProductID': 1,
+        'ProductName': 'Laptop',
+        'Quantity': 10,
+        'UnitsInStock': 50,
+        'Discontinued': False,
+        'Cost': 1000.00
+    })
+    Products.append({
+        'ProductID': 2,
+        'ProductName': 'Smartphone',
+        'Quantity': 25,
+        'UnitsInStock': 100,
+        'Discontinued': False,
+        'Cost': 500.00
+    })
+    Products.append({
+        'ProductID': 3,
+        'ProductName': 'Tablet',
+        'Quantity': 15,
+        'UnitsInStock': 75,
+        'Discontinued': False,
+        'Cost': 300.00
+    })
+    Products.append({
+        'ProductID': 4,
+        'ProductName': 'Monitor',
+        'Quantity': 20,
+        'UnitsInStock': 60,
+        'Discontinued': False,
+        'Cost': 150.00
+    })
+    Products.append({
+        'ProductID': 5,
+        'ProductName': 'Keyboard',
+        'Quantity': 50,
+        'UnitsInStock': 200,
+        'Discontinued': False,
+        'Cost': 25.00
+    })
+    Products.append({
+        'ProductID': 6,
+        'ProductName': 'Mouse',
+        'Quantity': 60,
+        'UnitsInStock': 250,
+        'Discontinued': False,
+        'Cost': 15.00
+    })
+    Products.append({
+        'ProductID': 7,
+        'ProductName': 'Printer',
+        'Quantity': 5,
+        'UnitsInStock': 30,
+        'Discontinued': True,
+        'Cost': 200.00
+    })
+    Products.append({
+        'ProductID': 8,
+        'ProductName': 'Headphones',
+        'Quantity': 40,
+        'UnitsInStock': 120,
+        'Discontinued': False,
+        'Cost': 75.00
+    })
+    TemplateFile = 'djangobasicapp/ShowProducts.html'
+    dict = {"Products": Products,"TotalProducts":len(Products),"Processors":Processors}
     
+    return render (request,TemplateFile,dict)
+
+
+    
+
     
