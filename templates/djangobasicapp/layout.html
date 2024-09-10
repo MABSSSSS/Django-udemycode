@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Django Training Demos</title>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'Index' %}">Django Training Demos</a>
+
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'Index' %}">Index</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'Home' %}">Hello World Demo</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'UseVariable' %}">Variables Demo</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'GetRequestDemo' %}">QueryString Demo</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'ShowDateTimeInfo' %}">Working With Templates</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'IfTagDemo' %}">If Template Tag</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'ShowProducts' %}">For Template Tag</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'ShowUsers' %}">Calling RESTAPI 1</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'ShowUsers2' %}">Calling RESTAPI 2</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        {% block body_block %}
+        {% endblock %}
+
+        <script src="" async defer></script>
+    </body>
+</html>

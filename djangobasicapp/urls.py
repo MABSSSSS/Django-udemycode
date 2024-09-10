@@ -6,10 +6,11 @@ from .import views
 
 
 urlpatterns=[
-path("", views.Home,name="Home"),
+path("", views.Index,name="Home"),
+path("Index", views.Index,name="Index"),
 path("Home", views.Home,name="Home"),
 path("ShowMessages", views.ShowMessages,name="SM"),
-path("UseVariables", views.UseVariable,name="UVR"),
+path("UseVariable", views.UseVariable,name="UVR"),
 path("GetRequestDemo", views.GetRequestDemo,name="GRV"),
 path("ShowDateTimeInfo", views.ShowDateTimeInfo,name="SDTI"),
 path("LoggingExample", views.LoggingExample,name="LoggingExample"),

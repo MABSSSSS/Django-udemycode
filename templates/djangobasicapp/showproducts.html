@@ -1,3 +1,6 @@
+{% extends 'djangobasicapp/Layout.html' %}
+
+{% comment %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,7 +14,12 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     </head>
     <body>
-        <div class="container mt-5">
+{% endcomment %}
+
+{% block body_block %}
+    <div class="container mt-5">
+        <!-- Check if Products exist -->
+        {% if Products %}
             <h2>Total Number Of Products: {{ TotalProducts }}</h2>
             <table class="table table-striped">
                 <thead>
@@ -37,74 +45,77 @@
                     {% endfor %}
                 </tbody>
             </table>
-        </div>
 
-        <ul>
-            {% for product in Products %}
-            <li>{{ product.ProductName }}</li>
-            {% endfor %}
-        </ul>
-
-        <ol>
-            {% for product in Products %}
-            <li>{{ product.ProductName }}</li>
-            {% endfor %}
-        </ol>
-
-        <ol class="list-unstyled">
-            {% for product in Products %}
-            <li>
-                <input type="checkbox" id="{{ product.ProductID }}"> {{ product.ProductName }}
-            </li>
-            {% endfor %}
-        </ol>
-
-        <ol class="list-unstyled">
-            {% for product in Products %}
-            <li>
-                <input id="{{ product.ProductID }}" type="radio" name="productName"> {{ product.ProductName }}
-            </li>
-            {% endfor %}
-        </ol>
-
-        <div>
-            <select class="form-select">
+            <ul>
                 {% for product in Products %}
-                <option value="{{ product.ProductID }}">{{ product.ProductName }}</option>
+                <li>{{ product.ProductName }}</li>
                 {% endfor %}
-            </select>
-        </div>
+            </ul>
 
-        <div>
-            <select class="form-select" size="4">
+            <ol>
                 {% for product in Products %}
-                <option value="{{ product.ProductID }}">{{ product.ProductName }}</option>
+                <li>{{ product.ProductName }}</li>
                 {% endfor %}
-            </select>
-        </div>
+            </ol>
 
-        <div class="form-group m-2">
-            <label>Product ID</label>
-            <input class="form-control" type="text" value="{{ Products.0.ProductID }}" />
+            <ol class="list-unstyled">
+                {% for product in Products %}
+                <li>
+                    <input type="checkbox" id="{{ product.ProductID }}" name="selected_products"> {{ product.ProductName }}
+                </li>
+                {% endfor %}
+            </ol>
 
-            <label>Product Name</label>
-            <input class="form-control" type="text" value="{{ Products.0.ProductName }}" />
+            <ol class="list-unstyled">
+                {% for product in Products %}
+                <li>
+                    <input id="{{ product.ProductID }}" type="radio" name="selected_product"> {{ product.ProductName }}
+                </li>
+                {% endfor %}
+            </ol>
 
-            <label>Quantity</label>
-            <input class="form-control" type="text" value="{{ Products.0.Quantity }}" />
+            <div>
+                <select class="form-select">
+                    {% for product in Products %}
+                    <option value="{{ product.ProductID }}">{{ product.ProductName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
-            <label>Units In Stock</label>
-            <input class="form-control" type="text" value="{{ Products.0.UnitsInStock }}" />
+            <div>
+                <select class="form-select" size="4">
+                    {% for product in Products %}
+                    <option value="{{ product.ProductID }}">{{ product.ProductName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
-            <label>Discontinued</label>
-            <input class="form-control" type="text" value="{{ Products.0.Discontinued }}" />
+            <div class="form-group m-2">
+                <label>Product ID</label>
+                <input class="form-control" type="text" value="{{ Products.0.ProductID }}" />
 
-            <label>Cost</label>
-            <input class="form-control" type="text" value="{{ Products.0.Cost }}" />
-        </div>
+                <label>Product Name</label>
+                <input class="form-control" type="text" value="{{ Products.0.ProductName }}" />
+
+                <label>Quantity</label>
+                <input class="form-control" type="text" value="{{ Products.0.Quantity }}" />
+
+                <label>Units In Stock</label>
+                <input class="form-control" type="text" value="{{ Products.0.UnitsInStock }}" />
+
+                <label>Discontinued</label>
+                <input class="form-control" type="text" value="{{ Products.0.Discontinued }}" />
+
+                <label>Cost</label>
+                <input class="form-control" type="text" value="{{ Products.0.Cost }}" />
+            </div>
+        {% else %}
+            <p>No products available to display.</p>
+        {% endif %}
 
         <div>
             <h2>Select Processor</h2>
+            {% if Processors %}
             <select class="form-select">
                 {% for processor in Processors %}
                 <optgroup label="{{ processor.Category }}">
@@ -114,6 +125,14 @@
                 </optgroup>
                 {% endfor %}
             </select>
+            {% else %}
+            <p>No processors available to display.</p>
+            {% endif %}
         </div>
+    </div>
+{% comment %}
     </body>
 </html>
+{% endcomment %}
+
+{% endblock %}
