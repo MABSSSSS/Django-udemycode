@@ -2,6 +2,8 @@ import datetime
 from django.http import HttpResponse
 from django.shortcuts import render
 from datetime import datetime
+
+import requests
 # Create your views here.
 
 # function based view
@@ -153,6 +155,26 @@ def ShowProducts(request):
     
     return render (request,TemplateFile,dict)
 
+
+def LoadUsers(request):
+    templatefilename="djangobasicapp/ShowUsers.html"
+    response = CallRestAPI()
+    dict={"users":response.json()}
+    return render(request, templatefilename,dict)
+    
+def CallRestAPI():
+    BASE_URL = 'https://fakestoreapi.com'
+    response = requests.get(f"{BASE_URL}/users")
+    return (response)  
+
+
+def LoadUsers2(request):
+    templatefilename="djangobasicapp/ShowUsersasCards.html"
+    image = 'https://i.pravatar.cc';
+    response = CallRestAPI()
+    dict={"users":response.json(),"image":image}
+    return render(request, templatefilename,dict)
+    
 
     
 

@@ -15,6 +15,8 @@ path("ShowDateTimeInfo", views.ShowDateTimeInfo,name="SDTI"),
 path("LoggingExample", views.LoggingExample,name="LoggingExample"),
 path("iftagdemo", views.iftagdemo,name="IFTAGDEMO"),
 path("ShowProducts", views.ShowProducts,name="SP"),
+path("ShowUsers", views.LoadUsers,name="LU"),
+path("ShowUsers2", views.LoadUsers2,name="LU2"),
 
         
 ]
