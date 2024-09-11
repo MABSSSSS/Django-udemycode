@@ -126,3 +126,29 @@ def LoadUsers2(request):
         users = []
     context = {"users": users, "image": image}
     return render(request, templatefilename, context)
+
+def CallRestAPI2(userid):
+    BASE_URL = 'https://fakestoreapi.com'
+    response = requests.get(f"{BASE_URL}/users/{userid}")
+    return response 
+
+def LoadUserDetails(request):
+    if request.method == "POST":
+        counter = int(request.POST.get("useridcounter"))
+        
+        if (request.POST.get("btnNext")):
+            counter= counter+1
+            if counter >=11:
+                counter=1
+        elif (request.POST.get("btnPrevious")):
+            counter= counter-1
+            if counter ==0:
+                counter=1
+    else:           
+         counter=1
+     
+    templatefilename = "djangobasicapp/ShowUserDetails.html"
+    response=CallRestAPI2(counter)
+    image = 'https://i.pravatar.cc'
+    dict = {"user":response.json(), "image":image}
+    return render(request, templatefilename, dict)
