@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 import requests
 import logging
-
+from  djangobasicapp.models import Authors
 # function based view
 def Home(request):
     return HttpResponse("<h1>Hello World from Django 5.</h1>")
@@ -152,3 +152,23 @@ def LoadUserDetails(request):
     image = 'https://i.pravatar.cc'
     dict = {"user":response.json(), "image":image}
     return render(request, templatefilename, dict)
+
+def PassModelToTemplate(request):
+    obj=Authors("Chad ","PK","UEFA")#model class object
+    templatefilename = "djangobasicapp/PassModel.html"
+    
+    AuthorsList=[]
+    AuthorsList.append(Authors('Lesnor', "USA","UFC"))
+    AuthorsList.append(Authors('Messi', "USA","UFC"))
+    AuthorsList.append(Authors('Lesnr', "USA","UFC"))
+    AuthorsList.append(Authors('Lenor', "USA","UFC"))
+    AuthorsList.append(Authors('Les', "USA","UFC"))
+    AuthorsList.append(Authors('Lor', "USA","UFC"))
+
+    
+    #Array of objects
+    Dict={"Author":obj,"Authors":AuthorsList}
+    return render(request, templatefilename, Dict)
+
+
+

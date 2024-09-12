@@ -39,6 +39,8 @@
     </button>
      <input class="form-check-input" type="checkbox" id="chkShowHide" onclick="toggleAll()"/>
      <label id="lblShowHide" for="chkShowHide">Show Address Details</label>
+
+
                 </form>
             </div>
         </div>
@@ -47,7 +49,7 @@
 
     <div class="col-6">
           <h2>Address Details</h2>
-          <div class="card w-50 p-2" id="UserDetails-{[user.id]}" style="display:none">
+          <div class="card w-50 p-2" id="AddressDetails-{[user.id]}" style="display:none">
 
             <div class="card-header" style="height:100px;">
                 <p><b> City: {{user.address.city}}</b></p>
@@ -83,6 +85,8 @@ function toggleAll()
         $("#lblShowHide").text("Show Address Details")
     else 
         $("lblShowHide").text("Hide Address Details")
+
+        
 }
 
 
