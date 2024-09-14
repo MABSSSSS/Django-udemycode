@@ -21,6 +21,8 @@ path("ShowUsers2", views.LoadUsers2,name="LU2"),
 path("ShowUsersDetails", views.LoadUserDetails, name="ShowUserDetails"),
 path("PassModel", views.PassModelToTemplate, name="LoadUsers2"),
 path("BIFDemo", views.BuiltInFiltersDemo, name="BIF"),
+path("CustomFiltersDemo", views.CustomFiltersDemo, name="CFDemo"),
+path("TestStaticFiles", views.TestStaticFiles, name="TSF"),
 
         
 ]

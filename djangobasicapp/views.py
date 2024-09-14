@@ -197,3 +197,15 @@ def BuiltInFiltersDemo(request):
     }
 
     return render(request,"djangobasicapp/BIFDemo.html",dict)
+
+def CustomFiltersDemo(request):
+    webframeworks={
+        'Description':'Django is a python framework that make it easier to create dynamic website',
+        'InDemand':'4.8',
+        'PollNumber':57650
+        
+    }
+    return render(request,"djangobasicapp/TestCustomFilters.html",webframeworks)
+
+def TestsStaticFiles(request):
+    return render(request, "djangobasicapp/TestStaticFiles.html")
