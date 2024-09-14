@@ -170,5 +170,30 @@ def PassModelToTemplate(request):
     Dict={"Author":obj,"Authors":AuthorsList}
     return render(request, templatefilename, Dict)
 
+def BuiltInFiltersDemo(request):
+    Processors=[
+        {"name":"Ryzen 3970","crores": 32},
+        {"name":"Ryzen 3950","crores": 16},
+        {"name":"Ryzen 3990","crores": 64},
 
+    ]
+    
+    dict ={
+        "ProbationPeriod":4,
+        "FirstName": "Connors",
+        "LastName":"McGregor",
+        "PayForFight":1234567,
+        "FirstQuarter":["Jan","Feb","Mar"],
+        "SecondQuarter":["Apr","May","Jun"],
+        "FQuarter":[1,2,3],
+        "SQuarter": [4,5,6],
+        "AboutMe":"I am notorious and I am Rutheless tool",
+        "now":datetime.datetime.now(),
+        "PreviousFight":"",
+        "NextFight":None,
+        "Processors":Processors,
+        "Message":"<h1>I am using escape</h1>",
+        "Website":"https://wwww.uiacademy.co.in"
+    }
 
+    return render(request,"djangobasicapp/BIFDemo.html",dict)
