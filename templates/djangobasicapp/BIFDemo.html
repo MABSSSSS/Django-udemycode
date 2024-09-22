@@ -1,0 +1,128 @@
+{% extends 'djangobasicapp/Layout.html' %}
+
+{%block body_block%}       
+
+<h1>Add Filter example : </h1>
+<p> {{ProbationPeriod | add:a}}</p>
+<p>{{FirstName | add:" " | add:LastName}}
+<P>{{2 | add:3}} </p>
+<p> Adding String Lists : {{FirstQuarter | add:SecondQuarter}}
+<p> Adding Integer Lists : {{FQuarter | add:SQuarter}}
+
+<h1>String Casing Filters</h1>
+        <p>Add Slashes : {{AboutMe | addslashes}}
+        <p>CapFirst : {{AboutMe | capFirst}}
+        <p>Lower : {{AboutMe | lower}}
+        <p>upper : {{AboutMe | upper}}
+        <p>Title : {{AboutMe | title}}
+
+<h1>Date Time Filters</h1>
+    <p>Now Is: {{ now }}
+    <P>Day of Month with leading zeros : {{ now|date:"d"}}
+    <P>Day of Month without leading zeros : {{ now|date:"j"}}
+    <p>Day of Week : {{now|date: "D"}}
+    <P>Day of Week Full Text: {{ now|date:"l"}}
+    <p>Day of Week : {{now|date:"w"}}
+    <p>Day of Year : {{ now|date:"z"}}
+
+    <p>Week Number : {{ now|date :"W"}}
+
+        <P>No of Month with leading zeros : {{ now|date:"m"}}
+            <P>No of Month without leading zeros : {{ now|date:"n"}}
+            <p>Month Name Upper  : {{now|date: "M"}}
+            <P>Month Name Lower : {{ now|date:"b"}}
+            <p>Month Name Full : {{now|date:"F"}}
+            <p>Month Name Abbreviation: {{now|date: "N"}}
+            <p> No of Days in amonth : {{ now|date: "t"}}
+
+
+                <p>Year With Leadiing Zeroes : {{now|date:"y"}}
+                <p>Year Without Leading eroes: {{now|date: "G"}}
+                <p> Leap Year? : {{ now|date: "L"}}
+             
+                    <p>12 Hour Format  Without Leading zeroes: {{now|date: "g"}}
+                    <p>24 Hour Format  Without Leading zeroes: {{now|date: "G"}}
+                    <p>12 Hour Format : {{ now|date:"h"}}
+                    <p>24 Hour Format : {{ now|date:"H"}}
+                    <p>Minutes : {{ now|date:"i"}}
+                    <p>Seconds : {{ now|date:"s"}}
+                    <p>Micro Seconds : {{ now|date:"u"}}
+                    <p>a.m or p.m : {{ now|date:"a"}}
+                    <p>AM OR PM : {{ now|date:"A"}}
+                    <P>Time in 12 Hour format : {{ now|date:"f"}}
+                    <p>Time in 12 Hour Format with a.m or p.m: {{ now|date:"P"}}
+                    <P>Ysing Multiple Specifiers {{now|date:"D d M Y"}}
+
+                    <p>Time : {{now|time:'H:i:s:u'}}
+
+
+<h1>Sorting Dictionaries</h1>
+
+<p>Sorting Dictionary : {{ Processor|dictsort:"cores"}}
+
+    <div>
+        <ul>
+            {% for Processor in Processors|dictsort:"cores" %}
+    <li>
+          {{Processor.name }} ({{ Processor.cores}})
+    </li>
+          {% endfor %}
+</ul>
+</div>
+
+<p>Reverse Sorting Dictionary : {{ Processors|dictsortreversed:"cores" }}
+
+    <div>
+        <ul>
+            {% for Processor in Processors|dictsortreversed:"cores" %}
+    <li>
+          {{Processor.name }} ({{ Processor.cores}})
+    </li>
+          {% endfor %}
+</ul>
+</div>
+
+
+<h1>Miscellaneous Filters</h1>
+<p>File size {{ PayForFight|filtersizeformat }}</p>
+   <p>{{Message}}</p>
+   <p>{{Message | safe}}
+   <p>{{Message | force_escape}}</p>
+   {% autoescape off %}
+      <p>{{Message | safe}}
+    {% endautoescape %}
+    </div>
+
+    <p>PreviousFight : {{PreviousFight|default:"Not Available"}}</p>
+    <p>Next Fight : {{NextFight|default_if_noe:"Not Available"}}</p>
+
+<h1>Numerical Filters</h1>
+<p>{{PayForFight | floatformat:'3'}}
+<p>{{PayForFight | floatformat:'3g'}}
+
+
+<p>{{PayForFight | divisbleby:'3'}}</p>
+<p>{{PayForFight | get_digit:'4'}}</p>
+
+<p>{{Processors|first}}</p>
+<p>{{Processors|last}}</p>
+
+
+<h1>Cut, Join,Slice</h1>
+
+<p>Cut : {{AboutMe | cut: " "}}
+    <p>{{ Processros|join:"// "}}</p>
+    <p>{{ Processors|slice,":1"}}</p>
+
+    <p>{{Processors|length}}</p>
+    <p>{{FirstName|make_list}}</p>
+    <p>{{Processors|random}}</p>
+
+    <p>{{ AboutMe|length}}</p>
+    <p>{{ AboutMe|truncatechars:21}}</p>
+    <p>{{AboutMe|truncatewords:2 }}</p>
+    <p>{{AboutMe|wordcount}}</p>
+
+
+{% endblock %}
+    

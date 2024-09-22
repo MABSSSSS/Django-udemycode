@@ -1,0 +1,29 @@
+{% extends 'djangobasicapp/Layout.html'%}
+
+{% block body_block%}
+
+<ul>
+    <li>{{Author.AuthorName}}</li>
+    <li>{{Author.Country}}</li>
+    <li>{{Author.BookName}}</li>
+</ul>
+
+<table class="table">
+    <thead>
+        <td>Author Name</td>
+        <td>Country</td>
+        <td>Book Name</td>
+    </thead>
+
+    {% for author in Authors %}
+      {% comment %} <tr>
+        <td>{{Author.AuthorName}}</td>
+        <td>{{Author.Country}}</td>
+        <td>{{Author.BookName}}</td>
+      </tr> {% endcomment %}
+
+      {% include "djangobasicapp/ShowAuthorPartialView.html" with author=author%}
+    {% endfor %}
+
+</table>
+ {% endblock %}

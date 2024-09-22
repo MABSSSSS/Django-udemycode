@@ -1,0 +1,32 @@
+{% load customfilters %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Test Custom Filters Demo</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+       
+    <ul>
+        <li>Course Description :{{Description | firstfiveupper}}</li> 
+        <li>Course Description :{{Description | firstfiveupper | lower}}</li> 
+
+        <li>Course Description :{{Description | firstnupper:10}}</li> 
+
+        <li>Course Description :{{Description | lengthlimit:20}}</li> 
+
+        <li>InDemand :{{InDemand | rating}}</li> 
+
+        <li>PollNumber:{{PollNumber}} i.e. ({{PollNumber | convertnumbertowords}})
+    
+    </ul>
+
+
+        <script src="" async defer></script>
+    </body>
+</html>

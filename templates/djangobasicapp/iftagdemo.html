@@ -1,0 +1,91 @@
+{% extends 'djangobasicapp/Layout.html' %}
+{% comment %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>If Template Tag Demo</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+{% endcomment %}
+    <!-- Check if user is logged in -->
+    {% block body_block %}
+    <div class="big-info p-2 mt-1">
+        {% if Data.loggedIn %}
+            <h1>Hi {{ Data.name }}!, You are logged in currently!</h1>
+        {% else %}
+            <h1>You are browsing our site as a Guest!</h1>
+        {% endif %}
+    </div> 
+
+    <!-- Check if name is James Anderson -->
+    <div class="big-info p-2 mt-1">
+        {% if Data.name == 'James Anderson' %}
+            <h1>Hi {{ Data.name }}!, You are also part of elite players!</h1>
+        {% else %}
+            <h1>Hi {{ Data.name }}!, You are an elite player part!</h1>
+        {% endif %}
+    </div>
+
+    <!-- Check work experience eligibility -->
+    <div class="big-info p-2 mt-1">
+        {% if 10 < Data.workExperience < 20 %}
+            <h1>Hi {{ Data.name }}!, You are eligible for the post of Senior Developer!</h1>
+        {% else %}
+            <h1>Hi {{ Data.name }}!, You are not eligible for the post of Senior Developer!</h1>
+        {% endif %}
+    </div>
+
+    <!-- Check if country code is Pakistan or UAE -->
+    <div class="big-info p-2 mt-1">
+        {% if Data.countryCode == 'Pakistan' or Data.countryCode == 'UAE' %}
+            <h1>Hi {{ Data.name }}!, The job market is doing good in these 2 countries!</h1>
+        {% endif %}
+    </div>
+
+    <!-- Check if name contains "Jimmy" -->
+    <div class="big-info p-2 mt-1">
+        {% if "Jimmy" in Data.name %}
+            <h1>Hi {{ Data.name }}!, You are part of the elite players list!</h1>
+        {% endif %}
+    </div>
+
+    <!-- Check if StateCode is None -->
+    <div class="big-info p-2 mt-1">
+        {% if Data.StateCode is None %}
+            <h1>Hi {{ Data.name }}!, Please supply a value for StateCode!</h1>
+        {% endif %}
+    </div>
+
+    <!-- Check if StateCode is not None -->
+    <div class="big-info p-2 mt-1">
+        {% if Data.StateCode is not None %}
+            <h1>Hi {{ Data.name }}!, StateCode has a value!</h1>
+        {% endif %}
+    </div>
+
+    <!-- Check CountryCode -->
+    <div class="big-info p-2 mt-1">
+        {% if Data.CountryCode == 'US' %}
+            <h1>Hi {{ Data.name }}!, You are from the United States!</h1>
+        {% elif Data.CountryCode == 'CA' %}
+            <h1>Hi {{ Data.name }}!, You are from Canada!</h1>
+        {% elif Data.CountryCode == 'GB' %}
+            <h1>Hi {{ Data.name }}!, You are from the United Kingdom!</h1>
+        {% elif Data.CountryCode == 'AU' %}
+            <h1>Hi {{ Data.name }}!, You are from Australia!</h1>
+        {% else %}
+            <h1>Hi {{ Data.name }}!, Your country is not listed!</h1>
+        {% endif %}
+    </div>
+    {% endblock %}
+
+{% comment %}
+    <script src="" async defer></script>
+    </body>
+</html>
+{% endcomment %}

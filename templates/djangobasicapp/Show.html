@@ -1,0 +1,45 @@
+{% extends 'djangobasicapp/Layout.html' %}
+
+{% comment %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Showing Current Server Time</title>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    </head>
+    <body>
+{% endcomment %}
+
+{% block body_block %}
+    <h1>Server Time is {{ TodaysDate }}</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>Month</th>
+                <th>Year</th>
+                <th>Hours</th>
+                <th>Minutes</th>
+                <th>Seconds</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ TodaysDate | date:'d' }}</td>
+                <td>{{ TodaysDate | date:'m' }}</td>
+                <td>{{ TodaysDate | date:'Y' }}</td>
+                <td>{{ TodaysDate | date:'H' }}</td>
+                <td>{{ TodaysDate | date:'i' }}</td>
+                <td>{{ TodaysDate | date:'s' }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
+
+{% comment %}
+</body>
+</html>
+{% endcomment %}
