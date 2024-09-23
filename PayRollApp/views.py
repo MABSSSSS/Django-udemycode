@@ -4,7 +4,10 @@ from PayRollApp.models import Employee
 # Create your views here.
 
 def EmployeesList(request):
-    Employees =Employee.objects.all()
+    # Employees =Employee.objects.all()
+    Employees = Employee.objects.select_related('EmpDepartment','EmpCountry').all()
+    print(Employees.query)
+    
     TemplateFile = "PayRollApp/EmployeesList.html"
     Dict={"Employees":Employees}
     return render(request, TemplateFile,Dict)
@@ -15,10 +18,11 @@ def EmployeeDetails(request, id):
     TemplateFile = "PayRollApp/EmployeeDetails.html"
     
     # Use get_object_or_404 to handle the case when the Employee does not exist
-    employee = get_object_or_404(Employee, id=id)
-    
+    # employee = get_object_or_404(Employee, id=id)
+    employee= Employee.objects.select_related('EmpDepartment','EmpCountry').all().filter(id =id)
+
     # Pass the employee object to the template as context
-    context = {"Employee": employee}
+    context = {"Employee": employee[0]}
     
     return render(request, TemplateFile, context)
 
@@ -27,10 +31,11 @@ def EmployeeDelete(request, id):
     TemplateFile = "PayRollApp/EmployeeDelete.html"
     
     # Use get_object_or_404 to handle the case when the Employee does not exist
-    employee = get_object_or_404(Employee, id=id)
+    # employee = get_object_or_404(Employee, id=id)
     
     # Pass the employee object to the template as context
-    context = {"Employee": employee}
+    employee= Employee.objects.select_related('EmpDepartment','EmpCountry').all().filter(id =id)
+    context = {"Employee": employee[0]}
     
     if request.method == "POST":
         employee.delete()
@@ -41,9 +46,13 @@ def EmployeeDelete(request, id):
 
 def EmployeeUpdate(request,id):
     TemplateFile="PayRollApp/EmployeeUpdate.html"
-    employee = Employee.objects.get(id=id)
-    form = EmployeeForm(instance=employee)
-    Dict={"form":form}
+    # employee = Employee.objects.get(id=id)
+    employee= Employee.objects.select_related('EmpDepartment','EmpCountry').all().filter(id =id)
+
+    for emp in employee:
+    # form = EmployeeForm(instance=employee)
+       form = EmployeeForm(instance=emp)
+       Dict={"form":form}
     
     if request.method=="POST":
         form = EmployeeForm(request.POST,instance=employee)

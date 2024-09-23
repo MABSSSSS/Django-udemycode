@@ -1,5 +1,20 @@
 from django.db import models
 
+class Department(models.Model):
+    DeptName = models.CharField(max_length=30)
+    LocationName= models.CharField(max_length=30)
+    
+    def __str__(self):
+        return self.DeptName 
+    
+class Country(models.Model):
+    CountryName = models.CharField(max_length=30)
+    
+    def __str__(self):
+        return self.CountryName
+    
+    
+
 class Employee(models.Model):
     COUNTRIES=[
         ("PAK", "PAKISTAN"),
@@ -21,5 +36,10 @@ class Employee(models.Model):
     Country=models.CharField(max_length=35, choices=COUNTRIES,default=None)
     Email = models.EmailField(default="", max_length=50)
     PhoneNumber = models.CharField(default="", max_length=20)
+    EmpDepartment = models.ForeignKey("Department", on_delete=models.PROTECT,related_name="Department")
+    EmpCountry = models.ForeignKey('Country',default=0, on_delete=models.PROTECT, related_name="Countries")
+
+    
+    
 
     

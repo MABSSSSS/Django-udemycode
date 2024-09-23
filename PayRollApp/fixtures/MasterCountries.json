@@ -1,0 +1,43 @@
+[{
+        "model": "PayRollApp.country",
+        "pk": 1,
+        "fields": {
+            "CountryName": "Pakistan"
+        }
+    },
+    {
+        "model": "PayRollApp.country",
+        "pk": 2,
+        "fields": {
+            "CountryName": "India"
+        }
+    },
+    {
+        "model": "PayRollApp.country",
+        "pk": 3,
+        "fields": {
+            "CountryName": "USA"
+        }
+    },
+    {
+        "model": "PayRollApp.country",
+        "pk": 4,
+        "fields": {
+            "CountryName": "Canada"
+        }
+    },
+    {
+        "model": "PayRollApp.country",
+        "pk": 5,
+        "fields": {
+            "CountryName": "UAE"
+        }
+    },
+    {
+        "model": "PayRollApp.country",
+        "pk": 6,
+        "fields": {
+            "CountryName": "KSA"
+        }
+    }
+]
