@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from PayRollApp.forms import EmployeeForm
-from PayRollApp.models import Employee
+from PayRollApp.forms import EmployeeForm, PartTimeEmployeeForm, PartTimeEmployeeFormSet
+from PayRollApp.models import Employee, PartTimeEmployee
 # Create your views here.
 
 def EmployeesList(request):
@@ -74,3 +74,81 @@ def EmployeeInsert(request):
     
     
     return render(request,TemplateFile, {'form':form})
+
+
+def BulkInsertDemo(request):
+    extra_forms = 10
+    forms =[PartTimeEmployeeForm(request.POST or None, prefix=f'employee-{i}') for i in range(extra_forms)]
+    Status=""
+    
+    if request.method == 'POST':
+        for form in forms:
+            if form.is_valid() and form.cleaned_data.get('First Name',''):
+                form.save()
+                Status="Records were inserted successfully.."
+    
+    return render(request, 'PayRollApp/parttimeemployee_list.html',{'forms':forms, 'extra_forms': range(extra_forms),"Status":Status})
+
+def NewBulkInsertDemo(request):
+    formset = PartTimeEmployeeFormSet(queryset =PartTimeEmployee.objects.none(),prefix='employee')
+    
+    if request.method == 'POST':
+        formset = PartTimeEmployeeFormSet(request.POST,prefix='employee')
+        if formset.is_valid():
+            employees = format.save(commit=False)
+            PartTimeEmployee.objects.bulk_create(employees)
+            return redirect('bulk_insert')
+    else:
+        formset = PartTimeEmployeeFormSet(queryset=PartTimeEmployee.objects.none(),prefix='employee')
+    
+    return render(request,"PayRollApp/NewBulkInsert.html", {'formset':formset})
+
+def BulkUpdateDemo(request):
+    employees=PartTimeEmployee.objects.all()
+    forms = [PartTimeEmployeeForm(request.POST or None, instance=employee, prefix=f'employee-{employee.id}') for employee in employees]
+ 
+    if request.method=='POST':
+        updated_data=[]
+        for form in forms:
+            if form.is_valid():
+                employee=form.instance 
+                employee.FirstName=form.cleaned_data['FirstName']  
+                employee.LastName=form.cleaned_data['LastName']   
+                employee.TitleName=form.cleaned_data['TtileName']   
+                updated_data.append(employee)
+                
+        PartTimeEmployee.objects.bulk_update(updated_data,['FirstName','LastName','TitleName'])
+ 
+    return render(request, 'PayRollApp/BulkUpdate.html', {'forms':forms, 'employees': employees})
+
+def BulkDeleteDemo(request):
+    employees=PartTimeEmployee.objects.all()
+    
+    if request.method=='POST':
+        selected_ids = request.POST.getlist('selected_ids')
+        
+        if selected_ids:
+            PartTimeEmployee.objects.filter(pk_in=selected_ids).delete()
+            return redirect('BulkDeleteDemo')
+    
+    return render(request, 'PayRollApp/BulkDelete.html',{'employees':employees})
+
+
+def DeleteUsingRadio(request):
+    employees=PartTimeEmployee.objects.all
+    
+    if request.method=='POST':
+        selected_id=request.POST.get('selected_id')
+        if selected_id:
+            PartTimeEmployee.objects.filter(pk=selected_id).delete()
+            return redirect('DeleteUsingRadio')
+    
+    return render(request,'PayRollApp/DeleteUsingRadio.html',{'employees':employees})
+
+
+
+
+
+
+
+    

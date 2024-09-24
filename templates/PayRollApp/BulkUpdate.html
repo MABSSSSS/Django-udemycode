@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Edit Employee Records</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        .form-row {
+            margin-bottom: 15px;
+        }
+
+        .form-row label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            width: 100%;
+        }
+
+        .row {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <center><h2>Edit Employee Records</h2></center>
+        <br/>
+
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ formset.management_form }}
+
+            <!-- Display blocks under headings -->
+            <div class="form-row">
+                <!-- First Name Column -->
+                <div class="col-md-3 mb-3">
+                    <label>First Name</label>
+                    {% for form in formset.forms %}
+                        <div>{{ form.FirstName }}</div>
+                    {% endfor %}
+                </div>
+
+                <!-- Last Name Column -->
+                <div class="col-md-3 mb-3">
+                    <label>Last Name</label>
+                    {% for form in formset.forms %}
+                        <div>{{ form.LastName }}</div>
+                    {% endfor %}
+                </div>
+
+                <!-- Title Column -->
+                <div class="col-md-3 mb-3">
+                    <label>Title</label>
+                    {% for form in formset.forms %}
+                        <div>{{ form.TitleName }}</div>
+                    {% endfor %}
+                </div>
+
+                <!-- ID Column (Optional if needed) -->
+                <div class="col-md-3 mb-3">
+                    <label>ID</label>
+                    {% for form in formset.forms %}
+                        <div>{{ form.instance.id }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <center>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </center>
+        </form>
+    </div>
+
+    <script src="" async defer></script>
+</body>
+</html>

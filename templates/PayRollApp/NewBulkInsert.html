@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>New Bulk Insert</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+        <style>
+            .form-row {
+                margin-bottom: 15px;
+            }
+
+            .form-row label {
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container mt-5">
+            <center><h2>Bulk Insert</h2></center>
+            <br/>
+            <form method="post" action="">
+                {% csrf_token %}
+                {{ formset.management_form }}
+
+                <!-- First Name Row -->
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label>First Name</label>
+                        {% for form in formset.forms %}
+                            <div>{{ form.FirstName }}</div>
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- Last Name Row -->
+                    <div class="col-md-4 mb-3">
+                        <label>Last Name</label>
+                        {% for form in formset.forms %}
+                            <div>{{ form.LastName }}</div>
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- Title Row -->
+                    <div class="col-md-4 mb-3">
+                        <label>Title</label>
+                        {% for form in formset.forms %}
+                            <div>{{ form.TitleName }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <center>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </center>
+            </form>
+        </div>
+        
+        <script src="" async defer></script>
+    </body>
+</html>
