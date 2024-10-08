@@ -4,6 +4,8 @@ from PayRollApp.models import Employee, PartTimeEmployee
 # Create your views here.
 from django.core.paginator import Paginator, PageNotAnInteger 
 from django.conf import settings 
+from django.db.models import Q 
+
 def EmployeesList(request):
     # Employees =Employee.objects.all()
     Employees = Employee.objects.select_related('EmpDepartment','EmpCountry').all()
@@ -152,15 +154,45 @@ def PageWiseEmployeesList(request):
     page_size = int(request.GET.get('page_size', getattr(settings, 'PAGE_SIZE',5)))
     page = request.GET.get('page', 1)
     
-    employees =PartTimeEmployee.objects.all()
+    search_query = request.GET.get('search', '')
+    
+    sort_by = request.GET.get('sort_by', 'id')
+    sort_order =request.GET.get('sort_order', 'asc')
+    
+    valid_sort_fields = ['id', 'FirstName', 'LastName', 'TitleName']
+    if sort_by not in valid_sort_fields:
+        sort_by = 'id'
+        
+    
+    # employees =PartTimeEmployee.objects.all()
+    employees = PartTimeEmployee.objects.filter(
+        Q(id__icontains=search_query)|
+        Q(FirstName__icontains=search_query)|
+        Q(LastName__icontains=search_query)|
+        Q(TitleName__icontains=search_query)
+    )
+    
+    if sort_order == 'desc':
+        employees = employees.order_by(f'-{sort_by}')
+    else:
+        employees = employees.order_by(sort_by)
+        
+    
     paginator = Paginator(employees, page_size)
     
     try:
         employees_page = paginator.page(page)
     except PageNotAnInteger:
         employees_page = paginator.page(1)
-    return render(request, 'PayRollApp/PageWiseEmployees.html', {'employees_page':employees_page, 'page_size':page_size})
-
+        
+    return render(request, 'PayRollApp/PageWiseEmployees.html', 
+                  {'employees_page':employees_page, 
+                   'page_size':page_size, 
+                   'search_query':search_query,
+                   'sort_by': sort_by,
+                   'sort_order': sort_order,
+                   })
+ 
 
 
 
