@@ -6,6 +6,7 @@ from PayRollApp.models import City, Employee, PartTimeEmployee, State
 from django.core.paginator import Paginator, PageNotAnInteger 
 from django.conf import settings 
 from django.db.models import Q 
+from django.db import transaction
 
 def EmployeesList(request):
     # Employees =Employee.objects.all()
@@ -219,5 +220,23 @@ def load_cities(request):
 
 
 
+def TransactionDemo(request):
+    try:
+        # Use transaction.atomic to ensure all or nothing behavior
+        with transaction.atomic():
+            # Inserting five employee records
+          employee= PartTimeEmployee.objects.create(Firstname='John Doe',Lastname='mag', TitleName='Manager')
+          employee= PartTimeEmployee.objects.create(Firstname='Jane Smith', Lastname='bag',TitleName='Developer')
+          employee= PartTimeEmployee.objects.create(Firstname='Alice Johnson', Lastname='mags',TitleName='Designer')
+          employee=PartTimeEmployee.objects.create(Firstname='Bob Brown', Lastname='maggg',TitleName='Tester')
+          employee=PartTimeEmployee.objects.create(Firstname='Charlie Green',Lastname='maag', TitleName='Support')
+
+
+    except Exception as e:
+        return render(request, "PayRollApp/TransactionDemo.html",{"Message":str(e)})
+    
+    return render(request,"PayRollApp/TransactionDemo.html",{"Message": "Success!!!"})
+        
+    
 
     
