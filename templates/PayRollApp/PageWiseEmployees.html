@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Pagination Demo</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        
+        <div class="container mt-5">
+            <center><h2>View All Employees</h2></center>
+            <br/>
+
+            <form id="page-size-form" method="get" action="">
+                <label for="page_size">Items per Page:</label>
+                <select id="page_size" name="page_size" onchange="updatePageSize()">
+                    <option value="5" {% if page_size == 5 %}selected{% endif %}>5</option>
+                    <option value="10" {% if page_size == 5 %}selected{% endif %}>10</option>
+                    <option value="15" {% if page_size == 5 %}selected{% endif %}>15</option>
+                    <option value="20" {% if page_size == 5 %}selected{% endif %}>20</option>
+                    <option value="25" {% if page_size == 5 %}selected{% endif %}>25</option>
+                    <option value="35" {% if page_size == 5 %}selected{% endif %}>35</option>
+                </select>
+            </form>
+
+
+
+        
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Title</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in employees_page %}
+                   <tr>
+                      <td> {{ employee.id}}</td>
+                      <td> {{ employee.FirstName}}</td>
+                      <td> {{ employee.LastName}}</td>
+                      <td> {{ employee.TitleName}}</td>
+                   </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+            
+        
+        <nav>
+            <ul class="pagination">
+                {% for page_num in employees_page.paginator.page_range %}
+                   <li class="page-item{% if page_num == employees_page.number %} active{% endif %}">
+                       <a class="page-link" href="?page={{ page_num }}&page_size={{ page_size }}">{{ page_num }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+
+
+
+
+        </div>
+
+        <script>
+            function updatePageSize() {
+                document.getElementById("page-size-form").submit();
+            }
+        </script>
+    </body>
+</html>

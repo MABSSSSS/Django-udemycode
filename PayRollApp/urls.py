@@ -14,5 +14,7 @@ path("NewBulkInsert", views.NewBulkInsertDemo,name="NewBulkInsert"),
 path("BulkUpdate", views.BulkUpdateDemo,name="BulkUpdate"),
 path("BulkDeleteDemo", views.BulkDeleteDemo,name="BulkDelete"),
 path("DeleteUsingRadio", views.DeleteUsingRadio,name="DeleteUsingRadio"),
+path("NewBulkInsert", views.NewBulkInsertDemo,name="NewBulkInsert"),
+path("PageWiseEmployeesList", views.PageWiseEmployeesList, name="PageWiseEmployeesList")
 
 ]

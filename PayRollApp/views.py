@@ -2,7 +2,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from PayRollApp.forms import EmployeeForm, PartTimeEmployeeForm, PartTimeEmployeeFormSet
 from PayRollApp.models import Employee, PartTimeEmployee
 # Create your views here.
-
+from django.core.paginator import Paginator, PageNotAnInteger 
+from django.conf import settings 
 def EmployeesList(request):
     # Employees =Employee.objects.all()
     Employees = Employee.objects.select_related('EmpDepartment','EmpCountry').all()
@@ -122,6 +123,8 @@ def BulkUpdateDemo(request):
     return render(request, 'PayRollApp/BulkUpdate.html', {'forms':forms, 'employees': employees})
 
 def BulkDeleteDemo(request):
+    page_size = int(request.GET.get('page_size', getattr(settings, 'PAGE_SIZE', 5)))
+    page = request.GET.get('page', 1)
     employees=PartTimeEmployee.objects.all()
     
     if request.method=='POST':
@@ -144,6 +147,19 @@ def DeleteUsingRadio(request):
             return redirect('DeleteUsingRadio')
     
     return render(request,'PayRollApp/DeleteUsingRadio.html',{'employees':employees})
+
+def PageWiseEmployeesList(request):
+    page_size = int(request.GET.get('page_size', getattr(settings, 'PAGE_SIZE',5)))
+    page = request.GET.get('page', 1)
+    
+    employees =PartTimeEmployee.objects.all()
+    paginator = Paginator(employees, page_size)
+    
+    try:
+        employees_page = paginator.page(page)
+    except PageNotAnInteger:
+        employees_page = paginator.page(1)
+    return render(request, 'PayRollApp/PageWiseEmployees.html', {'employees_page':employees_page, 'page_size':page_size})
 
 
 
